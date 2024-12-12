@@ -18,7 +18,7 @@ class StudentController extends Controller
             $students = Student::all();
             return view('students.index', compact('students'));
         } else {
-            return view('errors.404');
+            return view('errors.403');
         }
         
     }

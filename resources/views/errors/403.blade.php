@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>404 - Page Not Found</h1>
-        <p>Oops! The page you are looking for doesn't exist or has been moved.</p>
+        <h1>403 - Page not Authorize</h1>
+        <p>Oops! The page you are looking for dont have authorization.</p>
         <a href="{{ url('/') }}">Return to Home</a>
     </div>
 </body>

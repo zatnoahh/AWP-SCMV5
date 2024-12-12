@@ -18,7 +18,7 @@ class LecturerController extends Controller
         $lecturers = Lecturer::all();
         return view('lecturers.index', compact('lecturers'));
         } else {
-            return view('errors.404');
+            return view('errors.403');
         }
     }
 
