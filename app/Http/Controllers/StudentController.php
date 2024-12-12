@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,12 +15,22 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        if ($user->can('viewAny', Subject::class)) {
+            $students = Student::all();
+            return view('students.index', compact('students'));
+        } else {
+            return view('errors.403');
+        }
+       
+        /*
         if (Gate::allows('isAdmin')) {
             $students = Student::all();
             return view('students.index', compact('students'));
         } else {
             return view('errors.403');
         }
+        */
         
     }
 
@@ -28,6 +39,7 @@ class StudentController extends Controller
      */
     public function create()
     {
+        
         $subjects = Subject::all();
         return view('students.create', compact('subjects'));
     }
