@@ -19,7 +19,7 @@ class AssessmentController extends Controller
         $assessments = Assessment::with('subject')->get();
         return view('assessments.index', compact('assessments'));
         } else {
-            return view('errors.404');
+            return view('errors.403');
         }
       
     }

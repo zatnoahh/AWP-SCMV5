@@ -22,7 +22,7 @@ class SubjectController extends Controller
             $subjects = Subject::all();
             return view('subjects.index', compact('subjects'));
         } else {
-            return view('errors.404');
+            return view('errors.403');
         }
 
         /*if(Gate::allows('isAdmin' ) || Gate::allows('isStudent') || Gate::allows('isLecturer')){
@@ -44,7 +44,7 @@ class SubjectController extends Controller
             $lecturers = Lecturer::all(); // Retrieve all lecturers
             return view('subjects.create', compact('lecturers')); // Pass to view
         } else {
-            return view('errors.404');
+            return view('errors.403');
         }
         /*
         $lecturers = Lecturer::all(); // Retrieve all lecturers
@@ -57,6 +57,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate(['code','name','creditHours','lecturer_id']);
         Subject::create($request->all());
         return redirect()->route('subjects.index')->with('success', 'Subject created successfully.');
@@ -77,6 +78,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
+        $this->authorize('update', $subject);
         return view('subjects.edit', compact('subject'));
     }
 
